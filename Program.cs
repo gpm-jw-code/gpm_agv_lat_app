@@ -1,7 +1,12 @@
 using GPM_AGV_LAT_CORE;
 using Microsoft.AspNetCore.Http.Json;
+using GPM_AGV_LAT_APP.SingalRHubs;
+using GPM_AGV_LAT_CORE.GPMMiddleware.Manergers;
+using GPM_AGV_LAT_APP.Models;
 
 Startup.StartService();
+
+OrderManerger.OnNewOrderCreate += WebsocketClientManager.BrocastOrder;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -17,6 +22,7 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.PropertyNameCaseInsensitive = false;
     options.SerializerOptions.WriteIndented = true;
 });
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -27,12 +33,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseWebSockets();
-app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+app.UseCors(options => options.WithOrigins("http://localhost:8080").AllowCredentials().AllowAnyHeader().AllowAnyMethod());
 
 //app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapHub<AGVSOrderHub>("/OrdersHub");
 app.Run();
