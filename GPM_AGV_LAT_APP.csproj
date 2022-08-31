@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\GangHaoAGV\GangHaoAGV.csproj" />
     <ProjectReference Include="..\GPM_AGV_LAT_CORE\GPM_AGV_LAT_CORE.csproj" />
   </ItemGroup>
 
