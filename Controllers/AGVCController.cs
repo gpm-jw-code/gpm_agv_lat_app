@@ -8,16 +8,16 @@ namespace GPM_AGV_LAT_APP.Controllers
     [ApiController]
     public class AGVCController : ControllerBase
     {
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            return Ok(GPM_AGV_LAT_CORE.Startup.agv1.STATES._conn.connected);
-        }
 
         [HttpGet("States")]
         public async Task<IActionResult> States()
         {
             return Ok(AGVCManager.AGVCList);
+        }
+        [HttpGet("State")]
+        public async Task<IActionResult> StatesByID(string agvc_id)
+        {
+            return Ok(AGVCManager.AGVCList.FirstOrDefault(agv => agv.ID == agvc_id));
         }
 
         [HttpGet("AgvTypes")]
