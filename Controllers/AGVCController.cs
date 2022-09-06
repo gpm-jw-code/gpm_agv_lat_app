@@ -14,6 +14,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         {
             return Ok(AGVCManager.AGVCList);
         }
+
         [HttpGet("State")]
         public async Task<IActionResult> StatesByID(string agvc_id)
         {
@@ -24,6 +25,13 @@ namespace GPM_AGV_LAT_APP.Controllers
         public async Task<IActionResult> TypeQuery()
         {
             return Ok(AGVCManager.AGVCList.ToDictionary(agv => agv.ID, agv => agv.agvcType.ToString()));
+        }
+
+
+        [HttpGet("list")]
+        public async Task<IActionResult> GetList()
+        {
+            return Ok(AGVCManager.AGVCList.ToDictionary(agv => agv.ID, agv => agv.agvcType.ToString()).ToArray());
         }
     }
 }
