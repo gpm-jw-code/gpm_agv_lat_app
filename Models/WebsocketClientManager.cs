@@ -1,4 +1,5 @@
-﻿using GPM_AGV_LAT_CORE.GPMMiddleware.Manergers.Order;
+﻿using GPM_AGV_LAT_CORE.GPMMiddleware;
+using GPM_AGV_LAT_CORE.GPMMiddleware.Manergers.Order;
 using System.Net.WebSockets;
 using System.Text;
 
@@ -9,7 +10,7 @@ namespace GPM_AGV_LAT_APP.Models
 
         public static List<WebSocket> SubscribeOrderCLients = new List<WebSocket>();
 
-        internal static void BrocastOrder(object? sender, clsHostOrder newOrder)
+        internal static void BrocastOrder(object? sender, clsHostExecuting newOrder)
         {
             Brocast(SubscribeOrderCLients, System.Text.Json.JsonSerializer.Serialize(newOrder));
         }

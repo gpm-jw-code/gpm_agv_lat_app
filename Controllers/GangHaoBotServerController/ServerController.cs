@@ -61,9 +61,15 @@ namespace GPM_AGV_LAT_APP.Controllers.GangHaoBotServerController
         /// </summary>
         /// <returns></returns>
         [HttpPost("terminate")]
-        public async Task<IActionResult> Terminate()
+        public async Task<IActionResult> Terminate(object terminateObj)
         {
-            return Ok();
+            var name = terminateObj.GetType().Name;
+            return Ok(new ResponseBaseWithStringCreateOn()
+            {
+                code = 0,
+                msg = "ok",
+                create_on = DateTime.Now.ToString(),//2022-02-10T18:21:25.073Z
+            });
         }
 
 
