@@ -26,11 +26,11 @@ builder.Services.AddSignalR();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+
 app.UseWebSockets();
 app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
@@ -39,5 +39,4 @@ app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapHub<AGVSOrderHub>("/OrdersHub");
 app.Run();

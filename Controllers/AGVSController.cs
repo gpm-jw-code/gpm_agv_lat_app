@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using GPM_AGV_LAT_CORE.LATSystem;
 using GPM_AGV_LAT_CORE.AGVS;
+using GPM_AGV_LAT_APP.ViewModels;
 
 namespace GPM_AGV_LAT_APP.Controllers
 {
@@ -12,7 +13,12 @@ namespace GPM_AGV_LAT_APP.Controllers
         [HttpGet("Settings")]
         public async Task<IActionResult> Settings()
         {
-            return Ok(AGVSManager.CurrentAGVS);
+            AgvsInfo agvsInfo = new AgvsInfo
+            {
+                VenderName = AGVSManager.CurrentAGVS.VenderName,
+                ConnectionString = AGVSManager.CurrentAGVS.agvsParameters.tcpParams.Host
+            };
+            return Ok(agvsInfo);
         }
 
         [HttpGet]
