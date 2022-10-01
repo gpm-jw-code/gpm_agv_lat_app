@@ -4,6 +4,8 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateDocumentationFile>False</GenerateDocumentationFile>
+		<DocumentationFile>D:\專案\AGV-LAT\Code\LAT-Solution\gpm_agv_lat_app\app_webapi.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -22,6 +24,16 @@
 	<ItemGroup>
 		<ProjectReference Include="..\GangHaoAGV\GangHaoAGV.csproj" />
 		<ProjectReference Include="..\GPM_AGV_LAT_CORE\GPM_AGV_LAT_CORE.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="app_webapi.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\" />
 	</ItemGroup>
 
 </Project>

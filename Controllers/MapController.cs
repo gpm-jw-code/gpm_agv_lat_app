@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using GPM_AGV_LAT_CORE.AGVC;
 using System.Text;
+using static GPM_AGV_LAT_CORE.AGVC.AGVCStates.MapState;
 
 namespace GPM_AGV_LAT_APP.Controllers
 {
@@ -34,11 +35,65 @@ namespace GPM_AGV_LAT_APP.Controllers
                 while (wsClient.State == System.Net.WebSockets.WebSocketState.Open)
                 {
                     await Task.Delay(TimeSpan.FromMilliseconds(200));
-                    byte[] data = Encoding.ASCII.GetBytes(System.Text.Json.JsonSerializer.Serialize(agvList.ToDictionary(agv => agv.ID, agv => agv.agvcStates)));
+                    byte[] data = Encoding.ASCII.GetBytes(System.Text.Json.JsonSerializer.Serialize(agvList.ToDictionary(agv => agv.EQName, agv => agv.agvcStates)));
                     await wsClient.SendAsync(data, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
                 }
 
             }
+        }
+
+        [HttpGet("/map_agvc")]
+        public async Task GetAGVCByMapName(string mapName)
+        {
+            if (HttpContext.WebSockets.IsWebSocketRequest)
+            {
+                List<IAGVC> agvList = AGVCManager.GetAGVCByMapName(mapName);
+                var wsClient = await HttpContext.WebSockets.AcceptWebSocketAsync();
+                _ = Task.Factory.StartNew(() => wsClient.ReceiveAsync(new ArraySegment<byte>(new byte[128]),
+                    CancellationToken.None));
+
+                while (wsClient.State == System.Net.WebSockets.WebSocketState.Open)
+                {
+                    await Task.Delay(TimeSpan.FromMilliseconds(400));
+                    byte[] data = Encoding.ASCII.GetBytes(System.Text.Json.JsonSerializer.Serialize(agvList.ToDictionary(agv => agv.EQName, agv => agv.agvcStates)));
+                    await wsClient.SendAsync(data, System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None);
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// 取得所有地圖名稱
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetMapNames")]
+        public async Task<List<string>> GetMapNames()
+        {
+            return AGVCManager.GetMapNames();
+        }
+
+        [HttpGet("GetMapInfo")]
+        public async Task<MapInfo> GetMapInfo(string mapName)
+        {
+            List<IAGVC>? agvcList = AGVCManager.GetAGVCByMapName(mapName);
+            List<StationInfo> stations = new List<StationInfo>();
+            foreach (var agvc in agvcList)
+            {
+                var _stations = agvc.agvcStates.MapStates.currentMapInfo.stations;
+                foreach (var _station in _stations)
+                {
+                    if (stations.FirstOrDefault(s => s.id == _station.id) == null)
+                        stations.Add(_station);
+                }
+            }
+            return new MapInfo() { stations = stations.Distinct().ToList(), name = mapName, mapFileUrl = "http://192.168.0.104:7122/map/map1.png" };
+        }
+
+        [HttpGet("GetMapInfos")]
+        public async Task<List<MapInfo>> GetMapInfos()
+        {
+            List<string>? mapNames = await GetMapNames();
+            return mapNames.Select(name => GetMapInfo(name).Result).ToList();
         }
 
         [HttpGet("PositionSim")]

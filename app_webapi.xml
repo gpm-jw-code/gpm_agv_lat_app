@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GPM_AGV_LAT_APP</name>
+    </assembly>
+    <members>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.AGVCController.GetAgvcIPList">
+            <summary>
+            取得AGVC IP連線列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.robot_status_info_req(System.String,System.UInt16)">
+            <summary>
+            查詢機器人信息
+            </summary>
+            <param name="ip"></param>
+            <param name="cmdNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.robot_status_run_req(System.String)">
+            <summary>
+            查詢機器人的運行狀態信息(如運行時間、里程等)
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.robot_status_loc_req(System.String)">
+            <summary>
+            查詢機器人位置
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.robot_status_speed_req(System.String)">
+            <summary>
+            查詢機器人速度
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.robot_status_block_req(System.String)">
+            <summary>
+            查詢機器人被阻擋狀態
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.robot_status_battery_req(System.String)">
+            <summary>
+            查詢機器人電池狀態
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.robot_status_laser_req(System.String)">
+            <summary>
+            查詢機器人激光點雲數據
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.robot_status_path_req(System.String)">
+            <summary>
+            查詢機器人路徑數據
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.GetState(System.String,System.UInt16)">
+            <summary>
+            取得狀態數據JSON字串
+            </summary>
+            <param name="ip">AGVC IP</param>
+            <param name="cmdNo">Command ID</param>
+            <returns>JSON字串</returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.robot_control_reloc_req(System.String)">
+            <summary>
+            重定位 
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.GangHaoAGVCController.robot_control_comfirmloc_req(System.String)">
+            <summary>
+            確認定位正確 
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Controllers.OrdersController.Get">
+            <summary>
+            取得所有訂單
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GPM_AGV_LAT_APP.Models.WebsocketClientManager.Brocast(System.Collections.Generic.List{System.Net.WebSockets.WebSocket},System.String)">
+            <summary>
+            廣播訊息
+            </summary>
+            <param name="clients"></param>
+            <param name="message"></param>
+        </member>
+    </members>
+</doc>

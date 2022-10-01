@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using GPM_AGV_LAT_CORE.LATSystem;
 using GPM_AGV_LAT_CORE.AGVS;
 using GPM_AGV_LAT_APP.ViewModels;
+using GPM_AGV_LAT_CORE.GPMMiddleware;
 
 namespace GPM_AGV_LAT_APP.Controllers
 {
@@ -25,6 +26,12 @@ namespace GPM_AGV_LAT_APP.Controllers
         public async Task<IActionResult> Get()
         {
             return Ok(AGVSManager.CurrentAGVS);
+        }
+
+        [HttpGet("ExeTaskList")]
+        public async Task<List<clsHostExecuting>> ExeTaskList()
+        {
+            return AGVSManager.CurrentAGVS.ExecuteTaskList;
         }
     }
 }

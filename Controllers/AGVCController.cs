@@ -46,6 +46,19 @@ namespace GPM_AGV_LAT_APP.Controllers
             return AGVCManager.AGVCList.ToDictionary(agv => agv.EQName, agv => agv.agvcParameters.tcpParams.HostIP);
         }
 
+        [HttpGet("GetNativeData")]
+        public async Task<dynamic> GetAgvcNativeData(string eqName)
+        {
+            return await AGVCManager.GetAgvcNativeDataByEqName(eqName);
+        }
+
+
+        [HttpGet("GetAlarmState")]
+        public async Task<IActionResult> GetAlarmState(string eqName)
+        {
+            return Ok(await AGVCManager.getAlarmStateByEqName(eqName));
+        }
+
         [HttpPost("Reloc")]
         public async Task Reloc(string eqName)
         {
