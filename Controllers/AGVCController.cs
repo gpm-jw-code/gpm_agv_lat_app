@@ -10,6 +10,12 @@ namespace GPM_AGV_LAT_APP.Controllers
     public class AGVCController : ControllerBase
     {
 
+        [HttpGet("AGVCParams")]
+        public async Task<IActionResult> GetAGVCParams()
+        {
+            return Ok(AGVCManager.AGVCList.Select(agv => agv.agvcParameters));
+        }
+
         [HttpGet("States")]
         public async Task<IActionResult> States()
         {
@@ -56,7 +62,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         [HttpGet("GetAlarmState")]
         public async Task<IActionResult> GetAlarmState(string eqName)
         {
-            return Ok(await AGVCManager.getAlarmStateByEqName(eqName));
+            return Ok(await AGVCManager.GetAlarmStateByEqName(eqName));
         }
 
         [HttpPost("Reloc")]

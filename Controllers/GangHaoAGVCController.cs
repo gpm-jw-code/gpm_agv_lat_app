@@ -26,7 +26,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="cmdNo"></param>
         /// <returns></returns>
         [HttpGet("robot_status_info_req")]
-        public async Task<IActionResult> robot_status_info_req(string ip = "192.168.0.123", ushort cmdNo = 1000)
+        public async Task<IActionResult> robot_status_info_req(string ip = "192.168.1.227", ushort cmdNo = 1000)
         {
             return Ok(await GetState(ip, cmdNo));
         }
@@ -36,7 +36,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="ip"></param>
         /// <returns></returns>
         [HttpGet("robot_status_run_req")]
-        public async Task<IActionResult> robot_status_run_req(string ip = "192.168.0.123")
+        public async Task<IActionResult> robot_status_run_req(string ip = "192.168.1.227")
         {
             return Ok(await GetState(ip, 1002));
         }
@@ -47,7 +47,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="ip"></param>
         /// <returns></returns>
         [HttpGet("robot_status_loc_req")]
-        public async Task<IActionResult> robot_status_loc_req(string ip = "192.168.0.123")
+        public async Task<IActionResult> robot_status_loc_req(string ip = "192.168.1.227")
         {
             return Ok(await GetState(ip, 1004));
         }
@@ -58,7 +58,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="ip"></param>
         /// <returns></returns>
         [HttpGet("robot_status_speed_req")]
-        public async Task<IActionResult> robot_status_speed_req(string ip = "192.168.0.123")
+        public async Task<IActionResult> robot_status_speed_req(string ip = "192.168.1.227")
         {
             return Ok(await GetState(ip, 1005));
         }
@@ -69,7 +69,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="ip"></param>
         /// <returns></returns>
         [HttpGet("robot_status_block_req")]
-        public async Task<IActionResult> robot_status_block_req(string ip = "192.168.0.123")
+        public async Task<IActionResult> robot_status_block_req(string ip = "192.168.1.227")
         {
             return Ok(await GetState(ip, 1006));
         }
@@ -79,7 +79,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="ip"></param>
         /// <returns></returns>
         [HttpGet("robot_status_battery_req")]
-        public async Task<IActionResult> robot_status_battery_req(string ip = "192.168.0.123")
+        public async Task<IActionResult> robot_status_battery_req(string ip = "192.168.1.227")
         {
             return Ok(await GetState(ip, 1007));
         }
@@ -89,7 +89,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="ip"></param>
         /// <returns></returns>
         [HttpGet("robot_status_laser_req")]
-        public async Task<IActionResult> robot_status_laser_req(string ip = "192.168.0.123")
+        public async Task<IActionResult> robot_status_laser_req(string ip = "192.168.1.227")
         {
             return Ok(await GetState(ip, 1009));
         }
@@ -99,7 +99,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="ip"></param>
         /// <returns></returns>
         [HttpGet("robot_status_path_req")]
-        public async Task<IActionResult> robot_status_path_req(string ip = "192.168.0.123")
+        public async Task<IActionResult> robot_status_path_req(string ip = "192.168.1.227")
         {
             return Ok(await GetState(ip, 1010));
         }
@@ -111,7 +111,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="cmdNo">Command ID</param>
         /// <returns>JSON字串</returns>
         [HttpGet("StateQuery")]
-        public async Task<string> GetState(string ip = "192.168.0.123", ushort cmdNo = 1000)
+        public async Task<string> GetState(string ip = "192.168.1.227", ushort cmdNo = 1000)
         {
             AgvcIni(ip, out cAGV agv);
             if (!agv.StatesPortConnected)
@@ -129,7 +129,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="ip"></param>
         /// <returns></returns>
         [HttpPost("robot_control_reloc_req")]
-        public async Task<object> robot_control_reloc_req(string ip = "192.168.0.123")
+        public async Task<object> robot_control_reloc_req(string ip = "192.168.1.227")
         {
             AgvcIni(ip, out cAGV agv);
             if (!agv.StatesPortConnected)
@@ -142,7 +142,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="ip"></param>
         /// <returns></returns>
         [HttpPost("robot_control_comfirmloc_req")]
-        public async Task<object> robot_control_comfirmloc_req(string ip = "192.168.0.123")
+        public async Task<object> robot_control_comfirmloc_req(string ip = "192.168.1.227")
         {
             AgvcIni(ip, out cAGV agv);
             if (!agv.StatesPortConnected)
@@ -159,7 +159,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("robot_task_cancel_req")]
-        public async Task<object> robot_task_cancel_req(string ip = "192.168.0.123")
+        public async Task<object> robot_task_cancel_req(string ip = "192.168.1.227")
         {
             AgvcIni(ip, out cAGV agv);
             if (!agv.MapPortConnected)
@@ -174,7 +174,7 @@ namespace GPM_AGV_LAT_APP.Controllers
         /// <param name="ip"></param>
         /// <returns></returns>
         [HttpPost("robot_task_gotarget_req")]
-        public async Task<object> robot_task_gotarget_req([FromBody] robotMapTaskGoTargetReq_3051 target, string ip = "192.168.0.123")
+        public async Task<object> robot_task_gotarget_req([FromBody] robotMapTaskGoTargetReq_3051 target, string ip = "192.168.1.227")
         {
             AgvcIni(ip, out cAGV agv);
             if (!agv.MapPortConnected)
@@ -183,7 +183,14 @@ namespace GPM_AGV_LAT_APP.Controllers
         }
         #endregion
 
-
+        [HttpPost("PauseNavigate")]
+        public async Task PauseNavigate(string ip)
+        {
+            if (AgvcIni(ip, out cAGV agv))
+            {
+                await agv.NAVIGATIOR.PauseNavigate();
+            }
+        }
 
         private bool AgvcIni(string ip, out cAGV agv)
         {
