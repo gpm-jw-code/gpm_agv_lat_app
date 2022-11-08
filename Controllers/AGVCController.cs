@@ -38,7 +38,12 @@ namespace GPM_AGV_LAT_APP.Controllers
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
-            return Ok(AGVCManager.AGVCList.ToDictionary(agv => agv.ID, agv => new Dictionary<string, string>() { { "EQName", agv.EQName }, { "Type", agv.agvcType.ToString() } }).ToArray());
+            return Ok(AGVCManager.AGVCList.ToDictionary(agv => agv.ID, agv => new Dictionary<string, object>()
+            { 
+                { "EQName", agv.EQName }, 
+                { "Type", agv.agvcType.ToString() },
+                { "Connected", agv.agvcStates.States.EConnectionState== GPM_AGV_LAT_CORE.AGVC.AGVCStates.CONNECTION_STATE.CONNECTED}
+            }).ToArray());
         }
 
 

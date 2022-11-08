@@ -1,1 +1,1 @@
-{"odo":0.0,"today_odo":0.0,"time":0.0,"total_time":0.0,"controller_temp":0.0,"controller_humi":0.0,"controller_voltage":0.0,"ret_code":0,"create_on":"20220929 14:35:47","err_msg":"","json_reply":null,"conection_connected_inner":true}
+{"controller_humi":15.44,"controller_temp":51.189,"controller_voltage":23.697,"create_on":"2022-10-27T22:28:42.250Z","odo":313.613,"ret_code":0,"time":5229287,"today_odo":-0.0,"total_time":534786520}
