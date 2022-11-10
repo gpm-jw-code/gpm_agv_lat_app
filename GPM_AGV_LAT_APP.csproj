@@ -6,6 +6,11 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 		<DocumentationFile>D:\專案\AGV-LAT\Code\LAT-Solution\gpm_agv_lat_app\app_webapi.xml</DocumentationFile>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <Optimize>False</Optimize>
 	</PropertyGroup>
 
 	<ItemGroup>

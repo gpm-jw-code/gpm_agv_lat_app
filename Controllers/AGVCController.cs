@@ -39,8 +39,8 @@ namespace GPM_AGV_LAT_APP.Controllers
         public async Task<IActionResult> GetList()
         {
             return Ok(AGVCManager.AGVCList.ToDictionary(agv => agv.ID, agv => new Dictionary<string, object>()
-            { 
-                { "EQName", agv.EQName }, 
+            {
+                { "EQName", agv.EQName },
                 { "Type", agv.agvcType.ToString() },
                 { "Connected", agv.agvcStates.States.EConnectionState== GPM_AGV_LAT_CORE.AGVC.AGVCStates.CONNECTION_STATE.CONNECTED}
             }).ToArray());
@@ -84,5 +84,21 @@ namespace GPM_AGV_LAT_APP.Controllers
                 }
             }
         }
+
+
+        [HttpPost("OnlineStateSwitch")]
+        public async Task<IActionResult> ONlineStateSwitch(string eqName, int onlineMode, int currentStation)
+        {
+            Console.WriteLine("使用者要求 AGV-{0}在站點{1} 進行 {2}", eqName, currentStation, onlineMode == 0 ? "下線" : "上線");
+            var agv = AGVCManager.AGVCList.FirstOrDefault(agv => agv.EQName == eqName);
+            var currentOnlineMode = -1;
+            if (agv != null)
+            {
+                currentOnlineMode = await agv.OnlineStateSwitchInvoke(onlineMode, currentStation);
+            }
+
+            return Ok(currentOnlineMode);
+        }
+
     }
 }
